@@ -32,7 +32,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     TextView myAddress;
     TextView service;
-    JSONArray obj=null;
+    JSONArray obj = null;
     private static final String TAG = "FRAGMENT";
 
     @Override
@@ -48,13 +48,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        Log.e(TAG, response.toString()+"");
-                        if(response != null && response.length() > 6)
-                        {
+                        Log.e(TAG, response.toString() + "");
+                        if (response != null && response.length() > 6) {
 
                             obj = new JSONArray();
-                            obj=response;
-                            //getData();
+                            obj = response;
+
 
                         } else {
                             Log.e(TAG, "obj is null");
@@ -66,18 +65,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.e(TAG, "Error: " + error.getMessage() + "");
 
             }
-        }){ @Override
+        }) {
+            @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-            HashMap<String, String> headers = new HashMap<>();
-            headers.put("Authorization", "Bearer hari");
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer hari");
 
-            return headers;
-        }};
+                return headers;
+            }
+        };
 
         AppController.getInstance().addToRequestQueue(req, tag_json_arry);
 
-
-        //getData();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -91,8 +90,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
@@ -100,26 +97,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
-
-
-
         mMap = googleMap;
-
-
-        myAddress = (TextView)findViewById(R.id.textView);
-        service=(TextView)findViewById(R.id.textView1);
+        myAddress = (TextView) findViewById(R.id.textView);
+        service = (TextView) findViewById(R.id.textView1);
         mMap.getUiSettings().setMyLocationButtonEnabled(true);
         mMap.setMyLocationEnabled(true);
-        /*Location location=mMap.getMyLocation();
-      final LatLng CURLOC = new LatLng(15, 15);*/
 
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
-               // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(CURLOC, 15));
+
                 Log.e("asd", mMap.getCameraPosition().target.toString());
-
-
 
             }
         });
